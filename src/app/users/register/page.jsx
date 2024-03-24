@@ -20,7 +20,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Roles } from "@/constants/roles";
-import bcrypt from "bcryptjs";
 import useSWRMutation from "swr/mutation";
 
 async function sendRequest(url, { arg }) {
@@ -37,14 +36,7 @@ const userFormSchema = z.object({
     .max(52, { message: "Máximo 52 caracteres" }),
   role: z.string().min(1),
   email: z.string().email(),
-  password: z
-    .string()
-    .min(6)
-    .max(8)
-    .transform(async (value) => {
-      const hash = await bcrypt.hash(value, 5);
-      return hash;
-    }),
+  password: z.string().min(6).max(8),
 });
 
 export default function UserRegister() {
