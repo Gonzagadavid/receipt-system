@@ -11,7 +11,6 @@ export const authConfig = {
     async jwt({ token }) {
       if (token) {
         const user = await getUser(token.email);
-        console.log({ user });
         token.role = user.role;
       }
 
