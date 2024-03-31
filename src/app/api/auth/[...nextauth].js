@@ -1,8 +1,9 @@
 import { getUser } from "@/app/login/lib/getUserr";
+import { Routes } from "@/constants/routes";
 
 export const authConfig = {
   pages: {
-    signIn: "/login",
+    signIn: Routes.login,
   },
   session: {
     maxAge: 43200,
