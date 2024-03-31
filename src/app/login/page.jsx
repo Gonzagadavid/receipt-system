@@ -1,4 +1,6 @@
 import LoginForm from "@/components/custom/LoginForm";
+import { ShoppingBasket } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   return (
