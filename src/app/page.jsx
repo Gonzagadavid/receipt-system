@@ -8,7 +8,7 @@ export default function Home() {
       <div className="flex flex-wrap justify-around">
         {Object.keys(routesInfo).map((route) => (
           <Link key={route} href={route}>
-            <Card className="bg-primary px-8 py-4 m-6 w-96">
+            <Card className="bg-secondary px-8 py-4 m-6 w-96 text-primary">
               <CardContent className="flex justify-center">
                 {routesInfo[route].icon}
               </CardContent>

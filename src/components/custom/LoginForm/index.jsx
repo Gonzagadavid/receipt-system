@@ -10,6 +10,7 @@ import { Form } from "@/components/ui/form";
 import FormInput from "../FormInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ShoppingBasket } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -31,6 +32,10 @@ export default function LoginForm() {
     <Form {...form}>
       <form action={form.handleSubmit(dispatch)} className="space-y-3">
         <div className="flex-1 rounded-lg bg-secondary px-6 pb-4 pt-8">
+          <div className="flex flex-col items-center mb-16">
+            <ShoppingBasket size={80} />
+            <p className="text-4xl">Receipt System</p>
+          </div>
           <div className="w-full">
             <div>
               <FormInput control={form.control} name="email" label="E-mail" />
