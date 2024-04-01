@@ -1,12 +1,37 @@
 import NextAuth from "next-auth";
-import { authConfig } from "./[...nextauth]";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import * as z from "zod";
 import { getUser } from "@/app/login/lib/getUserr";
+import { Routes } from "@/constants/routes";
+export const {
+  auth,
+  signIn,
+  signOut,
+  handlers: { POST, GET },
+} = NextAuth({
+  pages: {
+    signIn: Routes.login,
+  },
+  session: {
+    maxAge: 43200,
+  },
+  callbacks: {
+    async jwt({ token }) {
+      if (token) {
+        const user = await getUser(token.email);
+        token.role = user.role;
+      }
 
-export const { auth, signIn, signOut } = NextAuth({
-  ...authConfig,
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.role = token.role;
+      }
+      return session;
+    },
+  },
   secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
@@ -20,6 +45,7 @@ export const { auth, signIn, signOut } = NextAuth({
           const user = await getUser(email);
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password);
+          console.log("aqui", password, user.password, passwordsMatch);
           if (passwordsMatch) return user;
           throw new Error("Invalid credentials");
         }
