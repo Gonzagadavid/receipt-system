@@ -21,6 +21,7 @@ export const Routes = {
   customers: "/customers",
   customerRegister: "/customers/register",
   login: "/login",
+  root: "/",
 };
 export const routesInfo = {
   [Routes.users]: {

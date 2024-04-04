@@ -1,1 +1,3 @@
-export const validateExp = (exp) => exp * 1000 >= new Date().getTime();
+export const validateExp = (exp) => {
+  return new Date(exp).getTime() >= Date.now();
+};

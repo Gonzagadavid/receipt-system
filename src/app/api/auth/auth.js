@@ -14,20 +14,13 @@ export const {
     signIn: Routes.login,
   },
   session: {
-    maxAge: 43200,
+    maxAge: 30,
   },
   callbacks: {
-    async jwt({ token }) {
-      if (token) {
-        const user = await getUser(token.email);
-        token.role = user.role;
-      }
-
-      return token;
-    },
-    async session({ session, token }) {
-      if (token) {
-        session.role = token.role;
+    async session({ session }) {
+      if (session) {
+        const user = await getUser(session.user.email);
+        session.role = user.role;
       }
       return session;
     },
@@ -45,7 +38,6 @@ export const {
           const user = await getUser(email);
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          console.log("aqui", password, user.password, passwordsMatch);
           if (passwordsMatch) return user;
           throw new Error("Invalid credentials");
         }

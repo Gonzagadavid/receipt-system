@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
+import LogoutButton from "@/components/custom/LogutButton";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,6 +14,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <header className="pt-4 flex justify-end">
+          <LogoutButton />
+        </header>
         <SessionProvider
           refetchOnWindowFocus={false}
           refetchWhenOffline={false}
