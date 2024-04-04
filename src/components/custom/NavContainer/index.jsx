@@ -27,6 +27,6 @@ export default function NavContainer() {
     [data?.role]
   );
   return (
-    <div className="flex w-[90%] flex-wrap justify-self-center">{routes}</div>
+    <div className="flex w-[94%] flex-wrap justify-self-center">{routes}</div>
   );
 }
