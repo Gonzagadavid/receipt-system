@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import LogoutButton from "@/components/custom/LogutButton";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }) {
           <ThemeProvider attribute="class" theme="dark">
             {children}
           </ThemeProvider>
+          <Toaster position="top-center" richColors />
         </SessionProvider>
       </body>
     </html>
