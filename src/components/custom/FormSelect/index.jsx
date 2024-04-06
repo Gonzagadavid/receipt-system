@@ -19,13 +19,14 @@ export default function FormSelect({
   control,
   options,
   className,
+  size,
 }) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={size}>
           {label && <FormLabel>{label}</FormLabel>}
           <Select
             onValueChange={field.onChange}
