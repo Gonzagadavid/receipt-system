@@ -14,7 +14,7 @@ export const {
     signIn: Routes.login,
   },
   session: {
-    maxAge: 30,
+    maxAge: 12 * 60 * 60,
   },
   callbacks: {
     async session({ session }) {
