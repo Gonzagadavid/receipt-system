@@ -15,7 +15,7 @@ export default class CustomerModel {
 
   async getCustomerByTaxpayer(taxpayerIdentification) {
     const query = "SELECT * from customers WHERE taxpayer_identification=?";
-    const customer = await this.db.execute(query, [taxpayerIdentification]);
+    const [[customer]] = await this.db.execute(query, [taxpayerIdentification]);
     return customer;
   }
 }
