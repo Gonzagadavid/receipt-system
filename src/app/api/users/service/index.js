@@ -9,8 +9,6 @@ export default class UserService {
 
   async createUser(user) {
     const { name, email, password, role } = user;
-    const exists = await this.getUserByEmail(email);
-    if (exists) return "User Already registred";
     const passwordHashed = await hashValue(password, +process.env.SALT_HAS);
     return this.model.createUser([name, email, passwordHashed, role]);
   }
