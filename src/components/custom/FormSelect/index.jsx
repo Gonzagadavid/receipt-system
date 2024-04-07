@@ -26,7 +26,7 @@ export default function FormSelect({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={size}>
+        <FormItem className={`${size} ${className}`}>
           {label && <FormLabel>{label}</FormLabel>}
           <Select
             onValueChange={field.onChange}
@@ -35,7 +35,10 @@ export default function FormSelect({
           >
             <FormControl>
               <SelectTrigger>
-                <SelectValue />
+                <SelectValue>
+                  {options.find(({ value }) => value == field.value)
+                    ?.optionLabel ?? field.value}
+                </SelectValue>
               </SelectTrigger>
             </FormControl>
             <SelectContent>
