@@ -71,7 +71,7 @@ export default function CustomerRegister() {
 
   return (
     <FormLayoutPage
-      title="Cadastro de Clientes"
+      title="Cadastro de Produtos"
       defaultValues={defaultValues}
       endpoint="/api/products"
       schema={productFormSchema}

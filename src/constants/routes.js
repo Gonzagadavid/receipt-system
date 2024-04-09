@@ -27,41 +27,57 @@ export const routesInfo = {
   [Routes.users]: {
     label: "Usuários",
     role: [Roles.MANAGER],
-    icon: <UsersRound size={100} />,
+    icon: (size, color = "primary") => (
+      <UsersRound size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.userRegister]: {
     label: "Cadatro de usuário",
     role: [Roles.MANAGER],
-    icon: <UserPlus size={100} />,
+    icon: (size, color = "primary") => (
+      <UserPlus size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.products]: {
     label: "Produtos",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <PackageSearch size={100} />,
+    icon: (size, color = "primary") => (
+      <PackageSearch size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.productRegister]: {
     label: "Cadastro de produto",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <PackagePlus size={100} />,
+    icon: (size, color = "primary") => (
+      <PackagePlus size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.sales]: {
     label: "Vendas",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <Notebook size={100} />,
+    icon: (size, color = "primary") => (
+      <Notebook size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.saleRegister]: {
     label: "Cadatro de venda",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <NotebookPen size={100} />,
+    icon: (size, color = "primary") => (
+      <NotebookPen size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.customers]: {
     label: "Clientes",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <BookUser size={100} />,
+    icon: (size, color = "primary") => (
+      <BookUser size={size} className={`text-${color}`} />
+    ),
   },
   [Routes.customerRegister]: {
     label: "Cadatro de cliente",
     role: [Roles.EMPLOYER, Roles.MANAGER],
-    icon: <BookPlus size={100} />,
+    icon: (size, color = "primary") => (
+      <BookPlus size={size} className={`text-${color}`} />
+    ),
   },
 };

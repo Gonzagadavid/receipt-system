@@ -13,7 +13,7 @@ export default function NavContainer() {
           <Link key={route} href={route}>
             <Card className="bg-secondary px-8 py-4 m-6 w-96 text-primary">
               <CardContent className="flex justify-center">
-                {routesInfo[route].icon}
+                {routesInfo[route].icon(100)}
               </CardContent>
               <CardFooter className="flex justify-center">
                 <p className="text-2xl align-center">
