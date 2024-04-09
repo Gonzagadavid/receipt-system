@@ -30,7 +30,7 @@ export default function LoginForm() {
     <>
       <Form {...form}>
         <form action={form.handleSubmit(dispatch)} className="space-y-3">
-          <div className="flex-1 rounded-lg bg-secondary px-6 pb-4 pt-8">
+          <div className="flex-1 rounded-lg bg-secondary px-6 pb-4 pt-8 w-96">
             <div className="flex flex-col items-center mb-16">
               <ShoppingBasket size={80} />
               <p className="text-4xl">Receipt System</p>

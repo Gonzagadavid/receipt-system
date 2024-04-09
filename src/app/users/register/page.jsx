@@ -46,7 +46,7 @@ const defaultValues = {
 export default function UserRegister() {
   return (
     <FormLayoutPage
-      title="Cadastro de usuários"
+      title="Cadastro de usuário"
       defaultValues={defaultValues}
       endpoint="/api/users"
       schema={userFormSchema}
