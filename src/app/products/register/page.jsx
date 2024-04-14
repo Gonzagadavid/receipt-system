@@ -26,6 +26,11 @@ const formInstance = {
     size: Size.sm,
     className: "ml-4",
   },
+  price: {
+    input: InputType.currency,
+    label: "Preço",
+    size: Size.sm,
+  },
 };
 
 export const productFormSchema = z.object({
@@ -33,14 +38,16 @@ export const productFormSchema = z.object({
     .string()
     .min(1, { message: "Campo obrigatório" })
     .max(52, { message: "Máximo 52 caracteres" }),
-  category: z.string().min(1),
-  state: z.string().min(1),
+  category: z.string().min(1, { message: "Campo obrigatório" }),
+  state: z.string().min(1, { message: "Campo obrigatório" }),
+  price: z.number(),
 });
 
 const defaultValues = {
   name: "",
   category: "",
   state: "",
+  price: "",
 };
 export default function CustomerRegister() {
   const [categoryOptions, setCategoryOptions] = useState([]);

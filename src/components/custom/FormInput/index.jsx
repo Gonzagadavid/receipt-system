@@ -6,6 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export const Size = {
   sm: "w-52",
@@ -27,15 +28,10 @@ export default function FormInput({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={size}>
+        <FormItem className={cn(size, className)}>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input
-              placeholder={placeholder}
-              type={inputType}
-              {...field}
-              className={className}
-            />
+            <Input placeholder={placeholder} type={inputType} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>

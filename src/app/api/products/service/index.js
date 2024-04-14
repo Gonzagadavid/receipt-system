@@ -6,8 +6,8 @@ export default class ProductService {
   }
 
   async createProduct(productData) {
-    const { name, category, state } = productData;
-    return this.model.createProduct([name, category, state]);
+    const { name, category, state, price } = productData;
+    return this.model.createProduct([name, category, state, price]);
   }
 
   async existsProduct(productData) {
