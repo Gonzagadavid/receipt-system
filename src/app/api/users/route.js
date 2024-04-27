@@ -1,10 +1,11 @@
 import { httpStatusCode } from "../httpStatusCode";
+import { toPaginationParams } from "../utils/toPaginationParams";
 import UserService from "./service";
 
 const service = new UserService();
 
-export async function POST(req) {
-  const body = await req.json();
+export async function POST(request) {
+  const body = await request.json();
 
   const exists = await service.getUserByEmail(body.email);
   if (exists)
@@ -15,4 +16,10 @@ export async function POST(req) {
 
   const resp = await service.createUser(body);
   return Response.json(resp);
+}
+
+export async function GET(request) {
+  const pagination = toPaginationParams(request.url);
+  const userList = await service.listUsers(pagination);
+  return Response.json(userList);
 }

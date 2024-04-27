@@ -1,4 +1,5 @@
 import { dbConnection } from "../../db";
+import { paginationResult } from "../../utils/paginationResult";
 
 export default class UserModel {
   constructor() {
@@ -17,5 +18,15 @@ export default class UserModel {
     const query = "SELECT email, password, role FROM users WHERE email=?";
     const [[resp]] = await this.db.execute(query, [email]);
     return resp;
+  }
+
+  async getAllUsers(pagination) {
+    console.log({ pagination });
+    const query = "SELECT name, email, role FROM users LIMIT ? OFFSET ?;";
+    const countQuery = "SELECT COUNT(*) as `total` from users;";
+    const [data] = await this.db.execute(query, pagination);
+    const [[{ total }]] = await this.db.execute(countQuery);
+
+    return { data, total };
   }
 }

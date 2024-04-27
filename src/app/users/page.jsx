@@ -1,3 +1,21 @@
-export default function User() {
-  return <h1>Usuários</h1>;
+import { getUsers } from "./_lib/fetcher";
+import { Suspense } from "react";
+import { columns } from "./_components/columns";
+import dynamic from "next/dynamic";
+const TablePage = dynamic(() => import("@/layouts/tablePage", { ssr: false }));
+
+export default async function User({ searchParams }) {
+  const users = await getUsers(searchParams);
+
+  return (
+    <Suspense
+      fallback={
+        <div>
+          <p>loading...</p>
+        </div>
+      }
+    >
+      <TablePage data={users} columns={columns} />
+    </Suspense>
+  );
 }

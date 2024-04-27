@@ -1,4 +1,5 @@
 import { hashValue } from "../../utils/hash";
+import { paginationResult } from "../../utils/paginationResult";
 
 import UserModel from "../model";
 
@@ -15,5 +16,13 @@ export default class UserService {
 
   async getUserByEmail(email) {
     return this.model.getUserByEmail(email);
+  }
+
+  async listUsers({ "page-size": pageSize, page }) {
+    console.log(page, pageSize * page);
+    const skip = String(+pageSize * (+page - 1));
+    console.log({ skip });
+    const usersData = await this.model.getAllUsers([pageSize, skip]);
+    return paginationResult({ page, pageSize, ...usersData });
   }
 }
