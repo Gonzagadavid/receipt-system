@@ -19,9 +19,7 @@ export default class UserService {
   }
 
   async listUsers({ "page-size": pageSize, page }) {
-    console.log(page, pageSize * page);
     const skip = String(+pageSize * (+page - 1));
-    console.log({ skip });
     const usersData = await this.model.getAllUsers([pageSize, skip]);
     return paginationResult({ page, pageSize, ...usersData });
   }

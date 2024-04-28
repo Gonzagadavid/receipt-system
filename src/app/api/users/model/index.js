@@ -21,7 +21,6 @@ export default class UserModel {
   }
 
   async getAllUsers(pagination) {
-    console.log({ pagination });
     const query = "SELECT name, email, role FROM users LIMIT ? OFFSET ?;";
     const countQuery = "SELECT COUNT(*) as `total` from users;";
     const [data] = await this.db.execute(query, pagination);
