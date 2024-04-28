@@ -41,13 +41,14 @@ export default function FormLayoutPage({
   formInstance,
   successMessage,
   errorMessage,
+  method,
 }) {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const { trigger } = useSWRMutation(endpoint, sendRequest, {
+  const { trigger } = useSWRMutation(endpoint, sendRequest(method), {
     onSuccess() {
       form.reset();
       toast.success(successMessage);

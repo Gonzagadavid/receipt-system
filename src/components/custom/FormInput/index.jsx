@@ -19,7 +19,7 @@ export default function FormInput({
   placeholder = "",
   label,
   control,
-  inputType,
+  type,
   className,
   size,
 }) {
@@ -31,7 +31,7 @@ export default function FormInput({
         <FormItem className={cn(size, className)}>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input placeholder={placeholder} type={inputType} {...field} />
+            <Input placeholder={placeholder} type={type} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
