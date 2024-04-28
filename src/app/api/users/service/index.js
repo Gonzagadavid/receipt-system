@@ -23,4 +23,16 @@ export default class UserService {
     const usersData = await this.model.getAllUsers([pageSize, skip]);
     return paginationResult({ page, pageSize, ...usersData });
   }
+
+  async updateUser(user, id) {
+    const { name, email, password, role } = user;
+    if (password) {
+      const passwordHashed = await hashValue(password, +process.env.SALT_HAS);
+      return this.model.updateUser(
+        [name, email, passwordHashed, role, id],
+        true
+      );
+    }
+    return this.model.updateUser([name, email, role, id]);
+  }
 }

@@ -21,11 +21,18 @@ export default class UserModel {
   }
 
   async getAllUsers(pagination) {
-    const query = "SELECT name, email, role FROM users LIMIT ? OFFSET ?;";
+    const query = "SELECT id, name, email, role FROM users LIMIT ? OFFSET ?;";
     const countQuery = "SELECT COUNT(*) as `total` from users;";
     const [data] = await this.db.execute(query, pagination);
     const [[{ total }]] = await this.db.execute(countQuery);
 
     return { data, total };
+  }
+
+  async updateUser(userData, hasPassword = false) {
+    const query = `UPDATE users set name=?, email=?,${hasPassword ? "password=?, " : ""} role=? WHERE id = ?;`;
+    const resp = await this.db.execute(query, userData);
+    if (!resp) throw new Error("An error occurred updating the user");
+    return "User updated successfully";
   }
 }

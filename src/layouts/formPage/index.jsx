@@ -42,6 +42,7 @@ export default function FormLayoutPage({
   successMessage,
   errorMessage,
   method,
+  submitCB,
 }) {
   const form = useForm({
     resolver: zodResolver(schema),
@@ -58,8 +59,9 @@ export default function FormLayoutPage({
     },
   });
 
-  const onSubmit = (values) => {
-    trigger(values);
+  const onSubmit = async (values) => {
+    await trigger(values);
+    if (submitCB) submitCB();
   };
 
   const inputsForm = useMemo(

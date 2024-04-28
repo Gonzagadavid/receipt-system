@@ -1,6 +1,9 @@
 "use client";
 
+import EditableModal from "@/components/custom/EditableModal";
 import { Roles } from "@/constants/roles";
+import { updateUserFormSchema, userFormSchema } from "../register/schema";
+import { formInstance } from "../register/page";
 
 export const columns = [
   {
@@ -16,5 +19,24 @@ export const columns = [
     header: "Cargo",
     cell: ({ row }) =>
       row.original.role === Roles.EMPLOYER ? "Funcionário" : "Gerente",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const { id, ...info } = row.original;
+      return (
+        <EditableModal
+          title="Editar informações do usuário"
+          defaultValues={info}
+          endpoint={`/api/users/user/${id}`}
+          schema={updateUserFormSchema}
+          buttonText="Editar"
+          formInstance={formInstance}
+          successMessage="Usuário atualizado com sucesso"
+          errorMessage="Ocorreu um erro ao tentar atualizar o usuário"
+          method="PUT"
+        />
+      );
+    },
   },
 ];

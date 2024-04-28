@@ -4,12 +4,12 @@ import { userFormSchema } from "./schema";
 import { Roles } from "@/constants/roles";
 import { Size } from "@/components/custom/FormInput";
 
-const rolesOptions = [
+export const rolesOptions = [
   { value: Roles.EMPLOYER, optionLabel: "Funcionário(a)" },
   { value: Roles.MANAGER, optionLabel: "Gerente" },
 ];
 
-const formInstance = {
+export const formInstance = {
   name: {
     input: InputType.text,
     label: "Nome",

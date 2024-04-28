@@ -1,6 +1,8 @@
 "use server";
 import { signIn, signOut } from "@/app/api/auth/auth";
 import { AuthError } from "next-auth";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function authenticate(prevState, formData) {
   try {
@@ -21,3 +23,8 @@ export async function authenticate(prevState, formData) {
 export async function logout() {
   await signOut();
 }
+
+export const revalidateAction = (path) => {
+  revalidatePath(path);
+  redirect(path);
+};
