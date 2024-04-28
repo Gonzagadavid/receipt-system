@@ -1,3 +1,4 @@
+import { paginationResult } from "../../utils/paginationResult";
 import CustomerModel from "../model";
 
 export default class CustomerService {
@@ -21,5 +22,11 @@ export default class CustomerService {
     );
     if (exists) return "Customer Already registered";
     return null;
+  }
+
+  async listCustomers({ "page-size": pageSize, page }) {
+    const skip = String(+pageSize * (+page - 1));
+    const customersData = await this.model.getAllCustomers([pageSize, skip]);
+    return paginationResult({ page, pageSize, ...customersData });
   }
 }

@@ -11,7 +11,7 @@ const formInstance = {
     size: Size.xl,
   },
   taxpayerIdentification: {
-    input: InputType.text,
+    input: InputType.register,
     label: "CPF / CNPJ",
     size: Size.lg,
   },

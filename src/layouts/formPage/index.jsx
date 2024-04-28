@@ -12,6 +12,7 @@ import { sendRequest } from "@/lib/fetchers";
 import { toast } from "sonner";
 import InputCurrency from "@/components/custom/InputCurrency";
 import { useMemo } from "react";
+import FormRegisterInput from "@/components/custom/FormRegisterInput";
 
 export const InputType = {
   number: "number",
@@ -19,6 +20,7 @@ export const InputType = {
   password: "password",
   select: "select",
   currency: "currency",
+  register: "register",
 };
 
 export const inputs = {
@@ -27,6 +29,7 @@ export const inputs = {
   password: FormInput,
   select: FormSelect,
   currency: InputCurrency,
+  register: FormRegisterInput,
 };
 
 export default function FormLayoutPage({

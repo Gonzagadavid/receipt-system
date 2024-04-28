@@ -16,7 +16,7 @@ export default async function Products({ searchParams }) {
         </div>
       }
     >
-      <TablePage data={products} columns={columns} />
+      <TablePage title="Produtos" data={products} columns={columns} />
     </Suspense>
   );
 }

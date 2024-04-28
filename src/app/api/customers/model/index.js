@@ -18,4 +18,13 @@ export default class CustomerModel {
     const [[customer]] = await this.db.execute(query, [taxpayerIdentification]);
     return customer;
   }
+  async getAllCustomers(pagination) {
+    const query =
+      "SELECT name, taxpayer_identification FROM customers LIMIT ? OFFSET ?;";
+    const countQuery = "SELECT COUNT(*) as `total` from customers;";
+    const [data] = await this.db.execute(query, pagination);
+    const [[{ total }]] = await this.db.execute(countQuery);
+
+    return { data, total };
+  }
 }

@@ -1,5 +1,6 @@
 import CustomerService from "./service";
 import { httpStatusCode } from "../httpStatusCode";
+import { toPaginationParams } from "../utils/toPaginationParams";
 
 const customerService = new CustomerService();
 
@@ -9,4 +10,10 @@ export async function POST(req) {
   if (exists) return Response.json(exists, { status: httpStatusCode.Conflict });
   const resp = await customerService.createCustomer(body);
   return Response.json(resp);
+}
+
+export async function GET(request) {
+  const pagination = toPaginationParams(request.url);
+  const customersList = await customerService.listCustomers(pagination);
+  return Response.json(customersList);
 }

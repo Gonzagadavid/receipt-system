@@ -7,6 +7,6 @@ export const customerFormSchema = z.object({
     .max(52, { message: "Máximo 52 caracteres" }),
   taxpayerIdentification: z
     .string()
-    .min(1)
+    .min(8)
     .transform((data) => data.replace(/\D/g, "")),
 });

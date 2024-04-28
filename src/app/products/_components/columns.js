@@ -1,6 +1,5 @@
 "use client";
 
-import { Roles } from "@/constants/roles";
 import { toLabelCategory, toLabelState } from "../utils";
 
 export const columns = [
