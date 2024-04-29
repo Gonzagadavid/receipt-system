@@ -1,5 +1,5 @@
 export const sendRequest = (method = "POST") =>
-  async function (url, { arg }) {
+  async function (url, { arg } = {}) {
     const res = await fetch(`http://localhost:3000${url}`, {
       method,
       body: JSON.stringify(arg),

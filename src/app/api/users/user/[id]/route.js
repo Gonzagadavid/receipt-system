@@ -8,3 +8,9 @@ export async function PUT(request, { params }) {
   const resp = await service.updateUser(body, id);
   return Response.json(resp);
 }
+
+export async function DELETE(request, { params }) {
+  const id = params.id;
+  const resp = await service.deleteUser(id);
+  return Response.json(resp);
+}

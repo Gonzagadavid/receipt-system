@@ -1,5 +1,4 @@
 import { dbConnection } from "../../db";
-import { paginationResult } from "../../utils/paginationResult";
 
 export default class UserModel {
   constructor() {
@@ -21,7 +20,8 @@ export default class UserModel {
   }
 
   async getAllUsers(pagination) {
-    const query = "SELECT id, name, email, role FROM users LIMIT ? OFFSET ?;";
+    const query =
+      "SELECT id, name, email, role FROM users WHERE deleted_at IS NULL LIMIT ? OFFSET ?;";
     const countQuery = "SELECT COUNT(*) as `total` from users;";
     const [data] = await this.db.execute(query, pagination);
     const [[{ total }]] = await this.db.execute(countQuery);
@@ -34,5 +34,12 @@ export default class UserModel {
     const resp = await this.db.execute(query, userData);
     if (!resp) throw new Error("An error occurred updating the user");
     return "User updated successfully";
+  }
+
+  async deleteUser(id) {
+    const query = `UPDATE users set deleted_at=? WHERE id = ?;`;
+    const resp = await this.db.execute(query, [new Date(), id]);
+    if (!resp) throw new Error("An error occurred removing the user");
+    return "User removed successfully";
   }
 }

@@ -35,4 +35,8 @@ export default class UserService {
     }
     return this.model.updateUser([name, email, role, id]);
   }
+
+  async deleteUser(id) {
+    return this.model.deleteUser(id);
+  }
 }
