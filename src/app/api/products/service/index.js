@@ -17,9 +17,25 @@ export default class ProductService {
     if (exists) return "Product Already registered";
     return null;
   }
+
   async listProducts({ "page-size": pageSize, page }) {
     const skip = String(+pageSize * (+page - 1));
     const productsData = await this.model.getAllProducts([pageSize, skip]);
     return paginationResult({ page, pageSize, ...productsData });
   }
+
+  async updateProduct(productData, id) {
+    const { name, category, state, price } = productData;
+    let categoryId = category;
+    if (/\D/.test(category)) {
+      categoryId = await this.model.getCategoryIdByName(category);
+    }
+    let stateId = state;
+    if (/\D/.test(category)) {
+      stateId = await this.model.getCategoryIdByName(category);
+    }
+
+    return this.model.updateProduct([name, categoryId, stateId, price], id);
+  }
+
 }

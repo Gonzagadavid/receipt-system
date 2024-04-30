@@ -39,4 +39,12 @@ export default class ProductModel {
 
     return { data, total };
   }
+
+  async updateProduct(productData, id) {
+    const query =
+      "UPDATE products set name=?,category=?,state=?,price=? WHERE id=?;";
+    const resp = this.db.execute(query, [...productData, id]);
+    if (!resp) throw new Error("An error occurred updating the product");
+    return "Product updated successfully";
+  }
 }
