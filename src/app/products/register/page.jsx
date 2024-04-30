@@ -8,7 +8,7 @@ import { fetcher } from "@/lib/fetchers";
 import { toLabelCategory, toLabelState } from "../utils";
 import { useState } from "react";
 
-const formInstance = {
+export const formInstance = {
   name: {
     input: InputType.text,
     label: "Nome do produto",

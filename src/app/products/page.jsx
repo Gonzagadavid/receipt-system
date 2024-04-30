@@ -6,7 +6,6 @@ const TablePage = dynamic(() => import("@/layouts/tablePage", { ssr: false }));
 
 export default async function Products({ searchParams }) {
   const products = await getProducts(searchParams);
-  console.log(products.data);
 
   return (
     <Suspense

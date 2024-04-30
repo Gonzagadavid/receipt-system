@@ -33,6 +33,7 @@ export default function InputCurrency({
               placeholder={placeholder}
               defaultValue={field.value}
               decimalsLimit={2}
+              decimalScale={2}
               onValueChange={(value, name, values) =>
                 field.onChange(values.float)
               }
