@@ -44,7 +44,7 @@ export default function LoginForm() {
                   control={form.control}
                   name="password"
                   label="Senha"
-                  inputType="password"
+                  type="password"
                 />
               </div>
             </div>
