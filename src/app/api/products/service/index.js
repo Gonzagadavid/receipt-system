@@ -38,4 +38,7 @@ export default class ProductService {
     return this.model.updateProduct([name, categoryId, stateId, price], id);
   }
 
+  async deleteProduct(id) {
+    return this.model.deleteProduct(id);
+  }
 }

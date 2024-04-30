@@ -8,3 +8,9 @@ export async function PUT(req, { params }) {
   const resp = await productService.updateProduct(body, id);
   return Response.json(resp);
 }
+
+export async function DELETE(request, { params }) {
+  const id = params.id;
+  const resp = await productService.deleteProduct(id);
+  return Response.json(resp);
+}

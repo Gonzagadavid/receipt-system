@@ -22,6 +22,7 @@ export default class ProductModel {
   async getAllProducts(pagination) {
     const query = `
     SELECT
+    p.id as id,
     p.name as name,
     c.name as category,
     s.state as state,
@@ -30,6 +31,7 @@ export default class ProductModel {
         products as p
         INNER JOIN categories as c ON p.category = c.id
         INNER JOIN states as s ON p.state = s.id
+    WHERE p.deleted_at IS NULL
     LIMIT ?
     OFFSET
     ?;`;
@@ -46,5 +48,24 @@ export default class ProductModel {
     const resp = this.db.execute(query, [...productData, id]);
     if (!resp) throw new Error("An error occurred updating the product");
     return "Product updated successfully";
+  }
+
+  async getCategoryIdByName(category) {
+    const query = "SELECT id FROM categories WHERE name=?";
+    const [[{ id }]] = await this.db.execute(query, [category]);
+    return id;
+  }
+
+  async getStateIdByName(state) {
+    const query = "SELECT id FROM states WHERE state=?";
+    const [[{ id }]] = await this.db.execute(query, [state]);
+    return id;
+  }
+
+  async deleteProduct(id) {
+    const query = `UPDATE products set deleted_at=? WHERE id = ?;`;
+    const resp = await this.db.execute(query, [new Date(), id]);
+    if (!resp) throw new Error("An error occurred removing the product");
+    return "product removed successfully";
   }
 }
