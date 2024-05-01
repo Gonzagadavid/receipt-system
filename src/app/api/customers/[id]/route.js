@@ -9,3 +9,9 @@ export async function PUT(request, { params }) {
   const resp = await customerService.updateCustomer(body, id);
   return Response.json(resp);
 }
+
+export async function DELETE(request, { params }) {
+  const id = params.id;
+  const resp = await customerService.deleteCustomer(id);
+  return Response.json(resp);
+}

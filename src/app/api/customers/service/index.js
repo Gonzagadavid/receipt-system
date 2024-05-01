@@ -35,4 +35,8 @@ export default class CustomerService {
 
     return this.model.updateCustomer([name, taxpayerIdentification], id);
   }
+
+  async deleteCustomer(id) {
+    return this.model.deleteCustomer(id);
+  }
 }

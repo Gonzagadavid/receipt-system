@@ -21,7 +21,7 @@ export default class CustomerModel {
 
   async getAllCustomers(pagination) {
     const query =
-      "SELECT id, name, taxpayer_identification FROM customers LIMIT ? OFFSET ?;";
+      "SELECT id, name, taxpayer_identification FROM customers WHERE deleted_at IS NULL LIMIT ? OFFSET ?;";
     const countQuery = "SELECT COUNT(*) as `total` from customers;";
     const [data] = await this.db.execute(query, pagination);
     const [[{ total }]] = await this.db.execute(countQuery);
@@ -35,5 +35,12 @@ export default class CustomerModel {
     const resp = await this.db.execute(query, [...customerData, id]);
     if (!resp) throw new Error("An error occurred updating the customer");
     return "Customer updated successfully";
+  }
+
+  async deleteCustomer(id) {
+    const query = `UPDATE customers set deleted_at=? WHERE id = ?;`;
+    const resp = await this.db.execute(query, [new Date(), id]);
+    if (!resp) throw new Error("An error occurred removing the customer");
+    return "Customer removed successfully";
   }
 }
