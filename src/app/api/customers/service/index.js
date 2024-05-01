@@ -29,4 +29,10 @@ export default class CustomerService {
     const customersData = await this.model.getAllCustomers([pageSize, skip]);
     return paginationResult({ page, pageSize, ...customersData });
   }
+
+  async updateCustomer(customer, id) {
+    const { name, taxpayerIdentification } = customer;
+
+    return this.model.updateCustomer([name, taxpayerIdentification], id);
+  }
 }

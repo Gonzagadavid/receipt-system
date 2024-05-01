@@ -18,13 +18,22 @@ export default class CustomerModel {
     const [[customer]] = await this.db.execute(query, [taxpayerIdentification]);
     return customer;
   }
+
   async getAllCustomers(pagination) {
     const query =
-      "SELECT name, taxpayer_identification FROM customers LIMIT ? OFFSET ?;";
+      "SELECT id, name, taxpayer_identification FROM customers LIMIT ? OFFSET ?;";
     const countQuery = "SELECT COUNT(*) as `total` from customers;";
     const [data] = await this.db.execute(query, pagination);
     const [[{ total }]] = await this.db.execute(countQuery);
 
     return { data, total };
+  }
+
+  async updateCustomer(customerData, id) {
+    console.log(customerData, id);
+    const query = `UPDATE customers set name=?, taxpayer_identification=? WHERE id = ?;`;
+    const resp = await this.db.execute(query, [...customerData, id]);
+    if (!resp) throw new Error("An error occurred updating the customer");
+    return "Customer updated successfully";
   }
 }
