@@ -1,4 +1,3 @@
-"use server";
 export const sendRequest = (method = "POST") =>
   async function (url, { arg } = {}) {
     const res = await fetch(`${process.env.BASE_URL}${url}`, {
