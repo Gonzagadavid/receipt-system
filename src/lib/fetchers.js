@@ -1,6 +1,6 @@
 export const sendRequest = (method = "POST") =>
   async function (url, { arg } = {}) {
-    const res = await fetch(`${process.env.BASE_URL}${url}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, {
       method,
       body: JSON.stringify(arg),
     });
@@ -10,7 +10,7 @@ export const sendRequest = (method = "POST") =>
   };
 
 export async function fetcher(url) {
-  const res = await fetch(`${process.env.BASE_URL}${url}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`);
   const response = await res.json().catch(() => null);
   if (!res.ok) return Promise.reject(response);
   return response;
