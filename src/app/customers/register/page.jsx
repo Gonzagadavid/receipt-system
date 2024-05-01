@@ -3,7 +3,7 @@ import FormLayoutPage, { InputType } from "@/layouts/formPage";
 import { Size } from "@/components/custom/FormInput";
 import { customerFormSchema } from "./schema";
 
-const formInstance = {
+export const formInstance = {
   name: {
     input: InputType.text,
     label: "Nome",
