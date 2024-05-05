@@ -26,8 +26,6 @@ export const {
       return session;
     },
   },
-  debug: true,
-  trustHost: true,
   secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
