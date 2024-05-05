@@ -2,6 +2,8 @@ import DeleteButton from "@/components/custom/DeleteButton";
 import EditableModal from "@/components/custom/EditableModal";
 import { useState } from "react";
 import useSWR from "swr";
+import { formInstance, productFormSchema } from "../register/page";
+import { fetcher } from "@/lib/fetchers";
 
 export default function Action({ id, info }) {
   const [categoryOptions, setCategoryOptions] = useState([]);

@@ -1,12 +1,7 @@
 "use client";
 
-import EditableModal from "@/components/custom/EditableModal";
 import { toLabelCategory, toLabelState } from "../utils";
-import { formInstance, productFormSchema } from "../register/page";
-import { useState } from "react";
-import useSWR from "swr";
-import { fetcher } from "@/lib/fetchers";
-import DeleteButton from "@/components/custom/DeleteButton";
+
 import Action from "./actions";
 
 export const columns = [
