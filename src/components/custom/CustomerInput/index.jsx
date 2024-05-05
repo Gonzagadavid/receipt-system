@@ -1,33 +1,14 @@
 "use client";
-import {
-  CalendarIcon,
-  EnvelopeClosedIcon,
-  FaceIcon,
-  GearIcon,
-  PersonIcon,
-  RocketIcon,
-} from "@radix-ui/react-icons";
 
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
+import { Command, CommandItem, CommandList } from "@/components/ui/command";
 
-import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetchers";
 import { useModal } from "@/hooks/useModal";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
 
-export function CustomerInput({ setSelectedCustomer }) {
-  const [name, setName] = useState("");
+export function CustomerInput({ setSelectedCustomer, name, setName }) {
   const debounce = useDebounce(name);
   const { isOpen, onClose, onOpen } = useModal(false);
   const { data = { data: [] }, isLoading } = useSWR(

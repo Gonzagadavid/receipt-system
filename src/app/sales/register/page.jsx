@@ -6,9 +6,11 @@ import ProductList from "@/components/custom/ProductList";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { sendRequest } from "@/lib/fetchers";
 
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
+import useSWRMutation from "swr/mutation";
 
 const initialProduct = {
   id: "",
@@ -23,6 +25,16 @@ export default function SaleRegister() {
   const [selectedCustomer, setSelectedCustomer] = useState("");
   const [productList, setProductList] = useState([]);
   const [rebate, setRebate] = useState(0);
+  const [name, setName] = useState("");
+
+  const { trigger } = useSWRMutation("/api/sales", sendRequest(), {
+    onSuccess() {
+      toast.success("Venda registrada com sucesso!");
+    },
+    onError() {
+      toast.error("Ocorreu um erro ao tentar registrar a venda");
+    },
+  });
 
   const resetSelectedProduct = () => {
     setSelectedProduct(initialProduct);
@@ -43,8 +55,32 @@ export default function SaleRegister() {
       0
     );
     if (!rebate) return totalValue;
-    return totalValue - (totalValue * rebate) / 100;
+    return totalValue - (totalValue * Number(rebate.replace(",", "."))) / 100;
   }, [productList, rebate]);
+
+  const registerSale = async () => {
+    if (!productList.length) {
+      toast.error("Nenhum produto adicionado");
+      return;
+    }
+    if (!selectedCustomer) {
+      toast.error("Nenhum cliente selecionado");
+      return;
+    }
+    const sale = {
+      products: productList,
+      customer: selectedCustomer,
+      rebate,
+      total,
+    };
+
+    await trigger(sale);
+    resetSelectedProduct();
+    setProductList([]);
+    setSelectedCustomer("");
+    setName("");
+    setRebate(0);
+  };
   return (
     <div className="grid grid-cols-2 w-[90%]">
       <div>
@@ -59,7 +95,8 @@ export default function SaleRegister() {
         />
         <div className="flex  flex-col w-[40rem] mx-10">
           <CustomerInput
-            selectedCustomer={selectedCustomer}
+            name={name}
+            setName={setName}
             setSelectedCustomer={setSelectedCustomer}
           />
         </div>
@@ -87,7 +124,7 @@ export default function SaleRegister() {
               maximumFractionDigits: 2,
             })}
           </Label>
-          <Button>Finalizar</Button>
+          <Button onClick={registerSale}>Finalizar</Button>
         </div>
       </div>
     </div>

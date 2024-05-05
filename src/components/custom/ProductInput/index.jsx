@@ -1,35 +1,16 @@
 "use client";
-import {
-  CalendarIcon,
-  EnvelopeClosedIcon,
-  FaceIcon,
-  GearIcon,
-  PersonIcon,
-  RocketIcon,
-} from "@radix-ui/react-icons";
 
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
+import { Command, CommandItem, CommandList } from "@/components/ui/command";
 
 import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetchers";
-import { useModal } from "@/hooks/useModal";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
 
 export function ProductInput({ setSelectedProduct, resetSelectedProduct }) {
   const [name, setName] = useState("");
   const debounce = useDebounce(name);
-  const { isOpen, onClose, onOpen } = useModal(false);
   const { data = { data: [] }, isLoading } = useSWR(
     `/api/products?name=${debounce}`,
     fetcher
@@ -43,7 +24,6 @@ export function ProductInput({ setSelectedProduct, resetSelectedProduct }) {
           resetSelectedProduct();
         }}
         placeholder="Selecione o produto"
-        onFocus={onOpen}
         className="w-[40rem]"
       />
       {
@@ -55,7 +35,6 @@ export function ProductInput({ setSelectedProduct, resetSelectedProduct }) {
                   className="w-full"
                   onClick={() => {
                     setSelectedProduct(product);
-                    onClose();
                   }}
                 >
                   <CommandItem key={product.id}>{product.name}</CommandItem>
