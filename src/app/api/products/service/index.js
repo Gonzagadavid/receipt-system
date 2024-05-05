@@ -18,9 +18,12 @@ export default class ProductService {
     return null;
   }
 
-  async listProducts({ "page-size": pageSize, page }) {
+  async listProducts({ pageSize = "30", page = "1" }, name) {
     const skip = String(+pageSize * (+page - 1));
-    const productsData = await this.model.getAllProducts([pageSize, skip]);
+    const productsData = await this.model.getAllProducts(
+      [pageSize, skip],
+      name
+    );
     return paginationResult({ page, pageSize, ...productsData });
   }
 

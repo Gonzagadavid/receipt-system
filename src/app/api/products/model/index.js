@@ -19,7 +19,7 @@ export default class ProductModel {
     return this.db.execute(query, productData);
   }
 
-  async getAllProducts(pagination) {
+  async getAllProducts(pagination, name) {
     const query = `
     SELECT
     p.id as id,
@@ -31,13 +31,16 @@ export default class ProductModel {
         products as p
         INNER JOIN categories as c ON p.category = c.id
         INNER JOIN states as s ON p.state = s.id
-    WHERE p.deleted_at IS NULL
+    WHERE p.deleted_at IS NULL ${name ? "AND p.name LIKE ?" : ""}
     LIMIT ?
     OFFSET
     ?;`;
-    const countQuery = "SELECT COUNT(*) as `total` from products;";
-    const [data] = await this.db.execute(query, pagination);
-    const [[{ total }]] = await this.db.execute(countQuery);
+    const countQuery = `SELECT COUNT(*) as total from products  WHERE  deleted_at IS NULL ${name ? "AND name LIKE ?" : ""};`;
+    const [data] = await this.db.execute(
+      query,
+      name ? [`%${name}%`, ...pagination] : pagination
+    );
+    const [[{ total }]] = await this.db.execute(countQuery, [`%${name}%`]);
 
     return { data, total };
   }
