@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import * as z from "zod";
-import { getUser } from "@/app/login/lib/getUserr";
+import { getUser } from "@/app/login/lib/getUser";
 import { Routes } from "@/constants/routes";
 export const {
   auth,
