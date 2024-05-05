@@ -21,6 +21,7 @@ export const {
       if (session) {
         const user = await getUser(session.user.email);
         session.role = user.role;
+        session.user.id = user.id;
       }
       return session;
     },

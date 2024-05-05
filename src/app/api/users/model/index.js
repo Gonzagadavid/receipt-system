@@ -14,7 +14,7 @@ export default class UserModel {
   }
 
   async getUserByEmail(email) {
-    const query = "SELECT email, password, role FROM users WHERE email=?";
+    const query = "SELECT id, email, password, role FROM users WHERE email=?";
     const [[resp]] = await this.db.execute(query, [email]);
     return resp;
   }
