@@ -9,7 +9,7 @@ export default class CustomerService {
   async createCustomer(customer) {
     const { name, taxpayerIdentification } = customer;
     const exists = await this.model.getCustomerByTaxpayer(
-      taxpayerIdentification
+      taxpayerIdentification,
     );
     if (exists) return "Customer Already registered";
     return this.model.createCustomer([name, taxpayerIdentification]);
@@ -18,7 +18,7 @@ export default class CustomerService {
   async getCustomerByTaxpayer(customer) {
     const { taxpayerIdentification } = customer;
     const exists = await this.model.getCustomerByTaxpayer(
-      taxpayerIdentification
+      taxpayerIdentification,
     );
     if (exists) return "Customer Already registered";
     return null;

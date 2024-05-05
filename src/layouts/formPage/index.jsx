@@ -81,7 +81,7 @@ export default function FormLayoutPage({
           />
         );
       }),
-    [formInstance]
+    [formInstance, form.control],
   );
 
   return (

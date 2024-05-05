@@ -6,7 +6,7 @@ import { Routes } from "@/constants/routes";
 import dynamic from "next/dynamic";
 
 const ExpiresModal = dynamic(
-  () => import("@/components/custom/ExpiresModal", { ssr: false })
+  () => import("@/components/custom/ExpiresModal", { ssr: false }),
 );
 
 export default async function LoginPage() {

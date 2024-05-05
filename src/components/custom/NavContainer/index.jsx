@@ -22,9 +22,9 @@ export default function NavContainer() {
               </CardFooter>
             </Card>
           </Link>
-        ) : null
+        ) : null,
       ),
-    [data?.role]
+    [data?.role],
   );
   return (
     <div className="flex w-[94%] flex-wrap justify-self-center">{routes}</div>

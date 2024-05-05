@@ -13,7 +13,7 @@ export function CustomerInput({ setSelectedCustomer, name, setName }) {
   const { isOpen, onClose, onOpen } = useModal(false);
   const { data = { data: [] }, isLoading } = useSWR(
     `/api/customers?name=${debounce}`,
-    fetcher
+    fetcher,
   );
 
   return (
@@ -34,6 +34,7 @@ export function CustomerInput({ setSelectedCustomer, name, setName }) {
             ? "loading..."
             : data.data.map((customer) => (
                 <button
+                  key={customer.id}
                   className="w-[40rem]"
                   onClick={() => {
                     setSelectedCustomer(customer.id);

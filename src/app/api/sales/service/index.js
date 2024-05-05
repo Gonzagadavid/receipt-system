@@ -9,7 +9,7 @@ export default class SalesService {
     const { products, customer, total, rebate } = saleData;
     return this.model.registerSales(
       [seller, customer, total, rebate, new Date()],
-      products
+      products,
     );
   }
 }

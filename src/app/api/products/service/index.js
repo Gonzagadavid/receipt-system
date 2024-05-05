@@ -22,7 +22,7 @@ export default class ProductService {
     const skip = String(+pageSize * (+page - 1));
     const productsData = await this.model.getAllProducts(
       [pageSize, skip],
-      name
+      name,
     );
     return paginationResult({ page, pageSize, ...productsData });
   }

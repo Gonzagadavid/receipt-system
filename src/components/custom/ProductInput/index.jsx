@@ -13,7 +13,7 @@ export function ProductInput({ setSelectedProduct, resetSelectedProduct }) {
   const debounce = useDebounce(name);
   const { data = { data: [] }, isLoading } = useSWR(
     `/api/products?name=${debounce}`,
-    fetcher
+    fetcher,
   );
 
   return (
@@ -32,6 +32,7 @@ export function ProductInput({ setSelectedProduct, resetSelectedProduct }) {
             ? "loading..."
             : data.data.map((product) => (
                 <button
+                  key={product.id}
                   className="w-full"
                   onClick={() => {
                     setSelectedProduct(product);

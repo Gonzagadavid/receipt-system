@@ -11,7 +11,7 @@ export async function POST(request) {
   if (exists)
     return Response.json(
       { message: "User Already registered" },
-      { status: httpStatusCode.Conflict }
+      { status: httpStatusCode.Conflict },
     );
 
   const resp = await service.createUser(body);

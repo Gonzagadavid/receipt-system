@@ -9,7 +9,7 @@ import { Trash2 } from "lucide-react";
 export default function ProductList({ setProductList, productList }) {
   const removeProduct = (productId) => {
     setProductList((prev) =>
-      prev.filter((product) => product.id !== productId)
+      prev.filter((product) => product.id !== productId),
     );
   };
 

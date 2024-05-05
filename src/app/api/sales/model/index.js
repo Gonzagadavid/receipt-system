@@ -20,7 +20,7 @@ export default class SalesModel {
           ...values,
           [product.id, insertId, product.price, product.quantity],
         ],
-        []
+        [],
       );
       const response = await conn.query(productQuery, [productValues]);
       if (!response) {

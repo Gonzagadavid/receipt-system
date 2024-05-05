@@ -52,7 +52,7 @@ export default function SaleRegister() {
   const total = useMemo(() => {
     const totalValue = productList.reduce(
       (totalPrice, product) => totalPrice + product.price * product.quantity,
-      0
+      0,
     );
     if (!rebate) return totalValue;
     return totalValue - (totalValue * Number(rebate.replace(",", "."))) / 100;

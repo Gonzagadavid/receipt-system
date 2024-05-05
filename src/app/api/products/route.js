@@ -16,7 +16,7 @@ export async function GET(request) {
   const { page, "page-size": pageSize, name } = toPaginationParams(request.url);
   const productList = await productService.listProducts(
     { pageSize, page },
-    name
+    name,
   );
   return Response.json(productList);
 }

@@ -30,7 +30,7 @@ export default class UserService {
       const passwordHashed = await hashValue(password, +process.env.SALT_HAS);
       return this.model.updateUser(
         [name, email, passwordHashed, role, id],
-        true
+        true,
       );
     }
     return this.model.updateUser([name, email, role, id]);

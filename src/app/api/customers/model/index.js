@@ -24,7 +24,7 @@ export default class CustomerModel {
     const countQuery = `SELECT COUNT(*) as total from customers  WHERE deleted_at IS NULL ${name ? "AND name LIKE ?" : ""};`;
     const [data] = await this.db.execute(
       query,
-      name ? [`%${name}%`, ...pagination] : pagination
+      name ? [`%${name}%`, ...pagination] : pagination,
     );
     const [[{ total }]] = await this.db.execute(countQuery);
 

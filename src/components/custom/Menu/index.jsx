@@ -25,7 +25,7 @@ export default function Menu() {
             <DrawerClose className="flex p-5 items-end">
               {routesInfo[route].icon(
                 30,
-                pathname === route ? "secondary" : "primary"
+                pathname === route ? "secondary" : "primary",
               )}
               <p
                 className={`ml-4 text-${pathname === route ? "secondary" : "primary"}`}
@@ -34,9 +34,9 @@ export default function Menu() {
               </p>
             </DrawerClose>
           </Link>
-        ) : null
+        ) : null,
       ),
-    [data?.role, pathname]
+    [data?.role, pathname],
   );
   return render ? (
     <Drawer direction="left">
