@@ -19,18 +19,19 @@ export default class CustomerModel {
     return customer;
   }
 
-  async getAllCustomers(pagination) {
-    const query =
-      "SELECT id, name, taxpayer_identification FROM customers WHERE deleted_at IS NULL LIMIT ? OFFSET ?;";
-    const countQuery = "SELECT COUNT(*) as `total` from customers;";
-    const [data] = await this.db.execute(query, pagination);
+  async getAllCustomers(pagination, name) {
+    const query = `SELECT id, name, taxpayer_identification FROM customers WHERE deleted_at IS NULL  ${name ? "AND name LIKE ?" : ""} LIMIT ? OFFSET ?;`;
+    const countQuery = `SELECT COUNT(*) as total from customers  WHERE deleted_at IS NULL ${name ? "AND name LIKE ?" : ""};`;
+    const [data] = await this.db.execute(
+      query,
+      name ? [`%${name}%`, ...pagination] : pagination
+    );
     const [[{ total }]] = await this.db.execute(countQuery);
 
     return { data, total };
   }
 
   async updateCustomer(customerData, id) {
-    console.log(customerData, id);
     const query = `UPDATE customers set name=?, taxpayer_identification=? WHERE id = ?;`;
     const resp = await this.db.execute(query, [...customerData, id]);
     if (!resp) throw new Error("An error occurred updating the customer");

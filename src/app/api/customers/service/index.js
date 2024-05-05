@@ -24,10 +24,10 @@ export default class CustomerService {
     return null;
   }
 
-  async listCustomers({ "page-size": pageSize, page }) {
+  async listCustomers({ pageSize = "30", page = "1" }, name) {
     const skip = String(+pageSize * (+page - 1));
     const customersData = await this.model.getAllCustomers([pageSize, skip]);
-    return paginationResult({ page, pageSize, ...customersData });
+    return paginationResult({ page, pageSize, ...customersData }, name);
   }
 
   async updateCustomer(customer, id) {

@@ -13,7 +13,10 @@ export async function POST(req) {
 }
 
 export async function GET(request) {
-  const pagination = toPaginationParams(request.url);
-  const customersList = await customerService.listCustomers(pagination);
+  const { page, "page-size": pageSize, name } = toPaginationParams(request.url);
+  const customersList = await customerService.listCustomers(
+    { pageSize, page },
+    name
+  );
   return Response.json(customersList);
 }
