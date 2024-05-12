@@ -4,13 +4,26 @@ import ProductInfoCard from "@/components/custom/ProductInfoCard";
 import { ProductInput } from "@/components/custom/ProductInput";
 import ProductList from "@/components/custom/ProductList";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { sendRequest } from "@/lib/fetchers";
-
+import { FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { SiGooglemaps } from "react-icons/si";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import useSWRMutation from "swr/mutation";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useModal } from "@/hooks/useModal";
+import ReceiptComponent from "../_components/ReceiptComponent";
 
 const initialProduct = {
   id: "",
@@ -26,10 +39,12 @@ export default function SaleRegister() {
   const [productList, setProductList] = useState([]);
   const [rebate, setRebate] = useState(0);
   const [name, setName] = useState("");
+  const { isOpen, onClose, onOpen } = useModal();
 
   const { trigger } = useSWRMutation("/api/sales", sendRequest(), {
     onSuccess() {
       toast.success("Venda registrada com sucesso!");
+      onOpen();
     },
     onError() {
       toast.error("Ocorreu um erro ao tentar registrar a venda");
@@ -75,11 +90,15 @@ export default function SaleRegister() {
     };
 
     await trigger(sale);
+  };
+
+  const onCloseReceipt = () => {
     resetSelectedProduct();
     setProductList([]);
     setSelectedCustomer("");
     setName("");
     setRebate(0);
+    onClose();
   };
   return (
     <div className="grid grid-cols-2 w-[90%]">
@@ -127,6 +146,14 @@ export default function SaleRegister() {
           <Button onClick={registerSale}>Finalizar</Button>
         </div>
       </div>
+      <ReceiptComponent
+        productList={productList}
+        isOpen={isOpen}
+        onClose={onCloseReceipt}
+        name={name}
+        total={total}
+        rebate={rebate}
+      />
     </div>
   );
 }
