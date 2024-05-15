@@ -1,5 +1,5 @@
 import { httpStatusCode } from "../httpStatusCode";
-import { toPaginationParams } from "../utils/toPaginationParams";
+import { getParams } from "../utils/getParams";
 import ProductService from "./service";
 
 const productService = new ProductService();
@@ -13,7 +13,7 @@ export async function POST(req) {
 }
 
 export async function GET(request) {
-  const { page, "page-size": pageSize, name } = toPaginationParams(request.url);
+  const { page, "page-size": pageSize, name } = getParams(request.url);
   const productList = await productService.listProducts(
     { pageSize, page },
     name,

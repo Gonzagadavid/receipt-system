@@ -1,6 +1,6 @@
 import CustomerService from "./service";
 import { httpStatusCode } from "../httpStatusCode";
-import { toPaginationParams } from "../utils/toPaginationParams";
+import { getParams } from "../utils/getParams";
 
 const customerService = new CustomerService();
 
@@ -13,7 +13,7 @@ export async function POST(req) {
 }
 
 export async function GET(request) {
-  const { page, "page-size": pageSize, name } = toPaginationParams(request.url);
+  const { page, "page-size": pageSize, name } = getParams(request.url);
   const customersList = await customerService.listCustomers(
     { pageSize, page },
     name,

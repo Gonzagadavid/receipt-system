@@ -1,5 +1,5 @@
 import { httpStatusCode } from "../httpStatusCode";
-import { toPaginationParams } from "../utils/toPaginationParams";
+import { getParams } from "../utils/getParams";
 import UserService from "./service";
 
 const service = new UserService();
@@ -19,7 +19,7 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const pagination = toPaginationParams(request.url);
+  const pagination = getParams(request.url);
   const userList = await service.listUsers(pagination);
   return Response.json(userList);
 }
