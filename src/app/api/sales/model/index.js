@@ -35,4 +35,16 @@ export default class SalesModel {
 
     return "sale registered successfully";
   }
+
+  async listSales() {
+    const query = `
+      SELECT s.created_at, u.name AS seller, s.total, s.rebate, c.name AS customer
+      FROM
+          sales AS s
+          INNER JOIN users AS u ON s.seller = u.id
+          INNER JOIN customers AS c ON c.id = s.customer;
+      `;
+    const result = await this.db.execute(query);
+    return result;
+  }
 }

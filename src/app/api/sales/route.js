@@ -9,3 +9,8 @@ export async function POST(request) {
   const message = await saleService.registerSale(user.id, body);
   return Response.json({ message });
 }
+
+export async function GET() {
+  const sales = await saleService.listSale();
+  return Response.json(sales);
+}

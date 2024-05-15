@@ -12,4 +12,8 @@ export default class SalesService {
       products,
     );
   }
+
+  async listSale() {
+    return this.model.listSales();
+  }
 }
