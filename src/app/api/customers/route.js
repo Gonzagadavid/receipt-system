@@ -1,6 +1,6 @@
 import CustomerService from "./service";
 import { httpStatusCode } from "../httpStatusCode";
-import { getParams } from "../utils/getParams";
+import { getParams } from "../utils/toPaginationParams";
 
 const customerService = new CustomerService();
 

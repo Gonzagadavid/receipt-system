@@ -71,4 +71,24 @@ export default class ProductModel {
     if (!resp) throw new Error("An error occurred removing the product");
     return "product removed successfully";
   }
+
+  async listProductsBySale(saleId) {
+    const query = `
+    SELECT
+        p.name as name,
+        c.name as category,
+        s.state as state,
+        current_price as price,
+        quantity
+    FROM
+        products_sales as ps
+        INNER JOIN products as p ON ps.products_id = p.id
+        INNER JOIN categories as c ON p.category = c.id
+        INNER JOIN states as s ON p.state = s.id
+    WHERE
+        sales_id = '13';
+     `;
+    const [productList] = await this.db.execute(query, saleId);
+    return productList;
+  }
 }

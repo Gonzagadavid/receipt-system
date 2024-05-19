@@ -44,4 +44,8 @@ export default class ProductService {
   async deleteProduct(id) {
     return this.model.deleteProduct(id);
   }
+
+  async listProductsBySale(saleId) {
+    return this.model.listProductsBySale([saleId]);
+  }
 }

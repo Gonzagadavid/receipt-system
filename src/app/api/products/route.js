@@ -1,5 +1,5 @@
 import { httpStatusCode } from "../httpStatusCode";
-import { getParams } from "../utils/getParams";
+import { getParams } from "../utils/toPaginationParams";
 import ProductService from "./service";
 
 const productService = new ProductService();

@@ -1,5 +1,5 @@
 import { httpStatusCode } from "../httpStatusCode";
-import { getParams } from "../utils/getParams";
+import { getParams } from "../utils/toPaginationParams";
 import UserService from "./service";
 
 const service = new UserService();

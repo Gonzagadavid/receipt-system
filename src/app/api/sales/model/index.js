@@ -36,15 +36,28 @@ export default class SalesModel {
     return "sale registered successfully";
   }
 
-  async listSales() {
+  async listSales({ customer, date_start, date_end }, pagination) {
+    const params = [customer, date_start, date_end].filter((param) => param);
     const query = `
-      SELECT s.created_at, u.name AS seller, s.total, s.rebate, c.name AS customer
+      SELECT s.id, s.created_at, u.name AS seller, s.total, s.rebate, c.name AS customer
       FROM
-          sales AS s
-          INNER JOIN users AS u ON s.seller = u.id
-          INNER JOIN customers AS c ON c.id = s.customer;
+        sales AS s
+        INNER JOIN users AS u ON s.seller = u.id
+        INNER JOIN customers AS c ON c.id = s.customer
+     ${customer || (date_start && date_end) ? " WHERE " : ""}
+       ${customer ? "s.customer = ?" : ""}
+       ${customer && date_start && date_end ? " AND " : ""}
+       ${date_start && date_end ? "s.created_at >= ? AND s.created_at <= ?" : ""} LIMIT ? OFFSET ?;
       `;
-    const result = await this.db.execute(query);
-    return result;
+    const totalQuery = `
+    SELECT count(*) FROM sales 
+   ${customer || (date_start && date_end) ? " WHERE " : ""}
+     ${customer ? "customer = ?" : ""}
+     ${customer && date_start && date_end ? " AND " : ""}
+     ${date_start && date_end ? "created_at >= ? AND created_at <= ?" : ""};
+    `;
+    const [data] = await this.db.execute(query, [...params, ...pagination]);
+    const [[{ total }]] = await this.db.execute(totalQuery, [...params]);
+    return { data, total };
   }
 }
