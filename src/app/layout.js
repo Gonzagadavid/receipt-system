@@ -6,6 +6,9 @@ import LogoutButton from "@/components/custom/LogutButton";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
 const Menu = dynamic(() => import("@/components/custom/Menu", { ssr: false }));
+const Title = dynamic(
+  () => import("@/components/custom/Title", { ssr: false }),
+);
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
@@ -21,8 +24,9 @@ export default async function RootLayout({ children }) {
           refetchWhenOffline={false}
         >
           <ThemeProvider attribute="class" theme="dark">
-            <header className="pt-4 flex justify-between h-[10vh]">
+            <header className="pt-4 flex justify-between items-center h-[10vh]">
               <Menu />
+              <Title />
               <LogoutButton />
             </header>
             <div className="h-[90vh]">{children}</div>

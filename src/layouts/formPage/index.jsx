@@ -86,7 +86,6 @@ export default function FormLayoutPage({
 
   return (
     <div className="flex flex-col items-center w-full h-full">
-      <h1 className="text-4xl text-primary m-8">{title}</h1>
       <div>
         <div className="bg-secondary w-[40rem] h-[23rem] p-4 rounded-lg">
           <Form {...form}>

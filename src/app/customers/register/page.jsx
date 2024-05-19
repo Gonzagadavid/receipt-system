@@ -24,7 +24,6 @@ const defaultValues = {
 export default function CustomerRegister() {
   return (
     <FormLayoutPage
-      title="Cadastro de Cliente"
       defaultValues={defaultValues}
       endpoint="/api/customers"
       schema={customerFormSchema}

@@ -15,7 +15,7 @@ export default async function User({ searchParams }) {
         </div>
       }
     >
-      <TablePage title="Usuários" data={users} columns={columns} />
+      <TablePage data={users} columns={columns} />
     </Suspense>
   );
 }
