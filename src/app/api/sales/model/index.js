@@ -50,7 +50,7 @@ export default class SalesModel {
        ${date_start && date_end ? "s.created_at >= ? AND s.created_at <= ?" : ""} LIMIT ? OFFSET ?;
       `;
     const totalQuery = `
-    SELECT count(*) FROM sales 
+    SELECT count(*)  as total FROM sales 
    ${customer || (date_start && date_end) ? " WHERE " : ""}
      ${customer ? "customer = ?" : ""}
      ${customer && date_start && date_end ? " AND " : ""}

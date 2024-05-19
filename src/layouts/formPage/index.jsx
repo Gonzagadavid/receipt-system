@@ -33,7 +33,6 @@ export const inputs = {
 };
 
 export default function FormLayoutPage({
-  title,
   endpoint,
   schema,
   defaultValues,

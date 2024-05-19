@@ -4,6 +4,17 @@ import ReceiptButton from "./ReceiptReview/ReceiptButton";
 
 export const columns = [
   {
+    accessorKey: "created_at",
+    header: "Data",
+    cell: ({ row }) => {
+      return new Date(row.original.created_at).toLocaleDateString("pt-BR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+    },
+  },
+  {
     accessorKey: "customer",
     header: "Cliente",
   },

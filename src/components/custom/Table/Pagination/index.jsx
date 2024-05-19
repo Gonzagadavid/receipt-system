@@ -27,7 +27,7 @@ export function DataTablePagination({ pageInfo }) {
     <div className="flex items-center justify-between px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {page} of {Math.ceil(total / pageSize)}
+          Page {page} of {Math.ceil(+total / +pageSize)}
         </div>
         <div className="flex items-center space-x-2">
           <Button

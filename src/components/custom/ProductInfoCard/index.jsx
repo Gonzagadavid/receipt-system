@@ -20,7 +20,6 @@ export default function ProductInfoCard({
   const { quantity, decreaseQty, increaseQty, onChangeQty } = useQuantity();
 
   const addProductInList = () => {
-    console.log("aqui");
     if (!selectedProduct.name) {
       toast.error("Não há produto selecionado!");
       return;

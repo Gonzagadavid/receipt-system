@@ -49,7 +49,7 @@ const defaultValues = {
   state: "",
   price: "",
 };
-export default function CustomerRegister() {
+export default function ProductsRegister() {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const categoriesFormInstance = {
