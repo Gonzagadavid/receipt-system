@@ -7,6 +7,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 export const Size = {
   sm: "w-52",
   lg: "w-96",
@@ -21,6 +23,15 @@ export default function InputCurrency({
   className,
   size,
 }) {
+  const [value, setValue] = useState("");
+  const { getValues } = useFormContext();
+  const priceValue = getValues("price");
+
+  useEffect(() => {
+    if (!priceValue) {
+      setValue("");
+    }
+  }, [priceValue]);
   return (
     <FormField
       control={control}
@@ -32,11 +43,13 @@ export default function InputCurrency({
             <CurrencyInput
               placeholder={placeholder}
               defaultValue={field.value}
+              value={value}
               decimalsLimit={2}
               decimalScale={2}
-              onValueChange={(value, name, values) =>
-                field.onChange(values.float)
-              }
+              onValueChange={(value, name, values) => {
+                setValue(value);
+                field.onChange(values.float);
+              }}
               groupSeparator="."
               decimalSeparator=","
               prefix="R$ "
