@@ -86,7 +86,7 @@ export default class ProductModel {
         INNER JOIN categories as c ON p.category = c.id
         INNER JOIN states as s ON p.state = s.id
     WHERE
-        sales_id = '13';
+        sales_id = ?;
      `;
     const [productList] = await this.db.execute(query, saleId);
     return productList;
