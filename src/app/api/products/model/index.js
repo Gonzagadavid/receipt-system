@@ -15,7 +15,7 @@ export default class ProductModel {
 
   async getProduct(productData) {
     const query =
-      "SELECT * FROM products WHERE name=? AND category=? AND state=?;";
+      "SELECT * FROM products WHERE name=? AND category=? AND state=? AND deleted_at IS NULL;";
     return this.db.execute(query, productData);
   }
 
