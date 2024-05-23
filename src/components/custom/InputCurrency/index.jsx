@@ -23,9 +23,9 @@ export default function InputCurrency({
   className,
   size,
 }) {
-  const [value, setValue] = useState("");
   const { getValues } = useFormContext();
   const priceValue = getValues("price");
+  const [value, setValue] = useState(priceValue);
 
   useEffect(() => {
     if (!priceValue) {
