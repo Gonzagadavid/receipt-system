@@ -26,7 +26,7 @@ export default class CustomerModel {
       query,
       name ? [`%${name}%`, ...pagination] : pagination,
     );
-    const [[{ total }]] = await this.db.execute(countQuery);
+    const [[{ total }]] = await this.db.execute(countQuery, [`%${name}%`]);
 
     return { data, total };
   }
