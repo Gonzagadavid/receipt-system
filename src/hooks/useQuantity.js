@@ -5,7 +5,7 @@ export const useQuantity = (initialQty = 1) => {
 
   const decreaseQty = () => {
     setQuantity((prev) => {
-      if (prev === 1) return prev;
+      if (!prev) return prev;
       return prev - 1;
     });
   };
